@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import styles from './Form.module.css'
 import { Form, Input, Button, Row, InputNumber } from 'antd'
 
-const { TextArea } = Input
-
 function FormComponent({ fields, form, history, title, onSubmit }) {
   const [state, setState] = useState({})
   const { getFieldDecorator, resetFields } = form
@@ -49,6 +47,8 @@ function FormComponent({ fields, form, history, title, onSubmit }) {
   )
 
   function renderInput(field) {
+    const { TextArea } = Input
+    
     if (field.type === 'number') return <InputNumber {...field} onChange={handleChange} />
     if (field.type === 'area') return <TextArea onChange={handleChange} rows={4} {...field} />
     return <Input {...field} onChange={handleChange} />
