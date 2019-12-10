@@ -2,9 +2,19 @@
   "orders": [
     {
       "id": 1,
-      "clientName": "json-server",
+      "createdAt": "2019-12-08T16:15:28.837Z",
+      "clientName": "Customer test",
       "cpf": "05455565995",
-      "description": "description"
+      "description": "description",
+      "status": "NOVO"
+    },
+    {
+      "clientName": "teste",
+      "cpf": "teste",
+      "description": "teste",
+      "status": "NOVO",
+      "createdAt": "2019-12-09T23:35:20.932Z",
+      "id": 2
     }
   ]
 }

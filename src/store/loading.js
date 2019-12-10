@@ -1,4 +1,4 @@
-const typeLoading = {
+const types = {
   start: 'LOADING_START',
   stop: 'LOADING_STOP'
 };
@@ -9,18 +9,18 @@ const INITIAL_STATE = {
 };
 
 export const loadingStart = () => ({
-  type: typeLoading.start
+  type: types.start
 });
 
 export const loadingStop = () => ({
-  type: typeLoading.stop
+  type: types.stop
 });
 
 export const loadingReducer = (state = INITIAL_STATE, { type }) => {
   switch (type) {
-    case typeLoading.start:
+    case types.start:
       return { ...state, counter: state.counter + 1, loading: true };
-    case typeLoading.stop:
+    case types.stop:
       if (state.counter > 1) {
         return { ...state, counter: state.counter - 1, loading: true };
       }

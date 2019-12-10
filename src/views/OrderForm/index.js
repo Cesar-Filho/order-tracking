@@ -1,14 +1,14 @@
-import React from 'react'
-import { Card } from 'antd'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { Card } from 'antd';
+import { useDispatch } from 'react-redux';
 
-import { save } from '../../store/orders'
-import FormComponent from '../../components/Form'
+import { save } from '../../store/orders';
+import FormComponent from '../../components/Form';
 
-import styles from './OrderForm.module.css'
+import styles from './OrderForm.module.css';
 
 export default function OrderForm() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <Card className={styles.card}>
@@ -19,8 +19,8 @@ export default function OrderForm() {
           { placeholder: 'CPF', name: 'cpf' },
           { placeholder: 'Descrição', name: 'description', type: 'area' }
         ]}
-        onSubmit={data => dispatch(save(data))}
+        onSubmit={data => dispatch(save({ ...data, status: 'NOVO' }))}
       />
     </Card>
-  )
+  );
 }

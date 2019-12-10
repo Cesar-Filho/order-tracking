@@ -1,0 +1,21 @@
+.status {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.novo {
+  background-color: red;
+}
+.preparando {
+  background-color: #f3f32f;
+}
+.conferencia {
+  background-color: green;
+}
+.pronto {
+  background-color: blue;
+}
+.excluido .pago {
+  background-color: #9f9fa0;
+}
