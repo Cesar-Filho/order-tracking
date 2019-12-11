@@ -1,19 +1,22 @@
 {
   "orders": [
     {
+      "clientName": "customer",
+      "cpf": "123456",
+      "description": "description customer",
+      "status": "EXCLUIDO",
+      "createdAt": "2019-12-11T23:01:10.627Z",
+      "readedAt": null,
       "id": 1,
-      "createdAt": "2019-12-08T16:15:28.837Z",
-      "clientName": "Customer test",
-      "cpf": "05455565995",
-      "description": "description",
-      "status": "NOVO"
+      "deletedAt": "2019-12-11T23:01:24.728Z"
     },
     {
-      "clientName": "teste",
-      "cpf": "teste",
-      "description": "teste",
-      "status": "NOVO",
-      "createdAt": "2019-12-09T23:35:20.932Z",
+      "clientName": "customer",
+      "cpf": "15151",
+      "description": "description customer\n",
+      "status": "CONFERENCIA",
+      "readedAt": null,
+      "createdAt": "2019-12-11T23:01:55.577Z",
       "id": 2
     }
   ]
