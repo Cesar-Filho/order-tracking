@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { parseISO, formatDistanceToNow } from 'date-fns';
@@ -7,10 +7,10 @@ import pt from 'date-fns/locale/pt-BR';
 
 import { getAll } from '../../store/orders';
 import Badge from '../../components/Badge';
+import Legends from '../../components/Legends';
 
 export default function OrderTracking() {
   const { list } = useSelector(state => state.order);
-  const [state, setState] = useState(list);
   const dispatch = useDispatch();
 
   const columns = [
@@ -19,19 +19,19 @@ export default function OrderTracking() {
     { title: 'Status', dataIndex: 'status', key: 'status', render: type => <Badge type={type} /> }
   ];
 
-  useEffect(() => dispatch(getAll()), [dispatch]);
-  useEffect(() => {
+  const state = useMemo(() => {
     const data = list.filter(l => !(l.status === 'PAGO' || l.status === 'EXCLUIDO'));
-    setState(
-      data.map(l => ({
-        ...l,
-        key: l.id,
-        clientName: l.clientName,
-        waitingTime: formatDistanceToNow(parseISO(l.createdAt), { locale: pt }),
-        status: l.status
-      }))
-    );
+
+    return data.map(l => ({
+      ...l,
+      key: l.id,
+      clientName: l.clientName,
+      waitingTime: formatDistanceToNow(parseISO(l.createdAt), { locale: pt }),
+      status: l.status
+    }));
   }, [list]);
+
+  useEffect(() => dispatch(getAll()), [dispatch]);
 
   return (
     <div style={{ margin: 40 }}>
@@ -46,18 +46,7 @@ export default function OrderTracking() {
           </span>
         )}
       />
-      <h3>Legenda</h3>
-      <div style={{ display: 'block' }}>
-        <Badge type="novo" />
-        <span>Pedido novo</span>
-      </div>
-
-      <Badge type="preparando" />
-      <span>Pedido sendo preparado</span>
-      <Badge type="conferencia" />
-      <span>Pedido em conferência</span>
-      <Badge type="pronto" />
-      <span>Pronto para pagamento</span>
+      <Legends />
     </div>
   );
 }

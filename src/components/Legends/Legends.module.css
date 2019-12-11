@@ -1,0 +1,9 @@
+.legends {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px 10px 0;
+}
+
+.legends_title {
+  margin-left: 10px;
+}
