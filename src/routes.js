@@ -6,6 +6,11 @@ const routes = [
     path: '/order-form',
     name: 'OrderForm',
     component: React.lazy(() => import('./views/OrderForm'))
+  },
+  {
+    path: '/advancing-order',
+    name: 'AdvancingOrder',
+    component: React.lazy(() => import('./views/AdvancingOrder'))
   }
 ];
 
