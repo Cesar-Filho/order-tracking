@@ -6,4 +6,4 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 
 server.use(router);
-server.listen(3003, () => console.log('JSON Server is running'));
+server.listen(process.env.REACT_APP_PORT || 3003, () => console.log('JSON Server is running'));

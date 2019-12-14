@@ -1,18 +1,26 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Table, Button, Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { parseISO, formatDistance } from 'date-fns';
-
-import pt from 'date-fns/locale/pt-BR';
+import { Table } from 'antd';
 
 import Badge from '../../components/Badge';
 import Legends from '../../components/Legends';
+import ModalOrder from '../../components/ModalOrder';
+import ActionsOrder from '../../components/ActionsOrder';
 import { getAll, deleted, next } from '../../store/orders';
 
 export default function OrderTracking() {
     const { list } = useSelector(state => state.order);
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+    const [itemVisible, setItemVisible] = useState({});
     const dispatch = useDispatch();
+
+    const state = useMemo(() => {
+        const data = list.filter(l => !(l.status === 'PAGO' || l.status === 'EXCLUIDO'));
+
+        return data.map(l => ({ ...l, key: l.id, actions: l })).sort((a, b) => a.id - b.id);
+    }, [list]);
+
+    useEffect(() => dispatch(getAll()), [dispatch]);
 
     const columns = [
         { title: 'Cliente', dataIndex: 'clientName', key: 'client' },
@@ -22,7 +30,7 @@ export default function OrderTracking() {
             key: 'status',
             align: 'center',
             width: '200px',
-            render: type => <Badge type={type} />
+            render: type => <Badge type={type} />,
         },
         {
             title: 'Ações',
@@ -30,46 +38,22 @@ export default function OrderTracking() {
             key: 'actions',
             align: 'center',
             width: '200px',
-            render: item => {
-                return (
-                    <>
-                        <Button onClick={() => setVisible(!visible)} style={{ margin: '0 5px 0 5px' }} size="large" shape="circle" icon="rise" />
-                        <Button onClick={() => dispatch(next(item))} style={{ margin: '0 5px 0 5px' }} shape="circle" type="primary" icon="forward" size="large" />
-                        <Button onClick={() => dispatch(deleted(item))} style={{ margin: '0 5px 0 5px' }} shape="circle" type="danger" icon="close" size="large" />
-                        <Modal
-                            title="Detalhe do pedido"
-                            visible={visible}
-                            onOk={() => setVisible(false)}
-                            onCancel={() => setVisible(false)}
-                        >
-                            <p><strong>Cliente:</strong> {item.clientName}</p>
-                            <p><strong>CPF:</strong> {item.cpf}</p>
-                            <p><strong>Status:</strong> {item.status}</p>
-                            <p><strong>Descrição:</strong> {item.description}</p>
-                            <p><strong>Tempo de espera:</strong> {formatDistance(parseISO(item.createdAt), item.readedAt ? parseISO(item.readedAt) : new Date(), { locale: pt })}</p>
-                        </Modal>
-                    </>
-                );
-            }
-        }
+            render: item => (
+                <ActionsOrder
+                    item={item}
+                    nextItem={() => dispatch(next(item))}
+                    deleteItem={() => dispatch(deleted(item))}
+                    showItem={() => {
+                        setItemVisible(item);
+                        setVisible(!visible);
+                    }}
+                />
+            ),
+        },
     ];
 
-    const state = useMemo(() => {
-        const data = list.filter(l => !(l.status === 'PAGO' || l.status === 'EXCLUIDO'));
-
-        return data.map(l => ({
-            ...l,
-            key: l.id,
-            clientName: l.clientName,
-            status: l.status,
-            actions: l
-        }));
-    }, [list]);
-
-    useEffect(() => dispatch(getAll()), [dispatch]);
-
     return (
-        <div style={{ margin: 40 }}>
+        <>
             <Table
                 bordered
                 title={() => <h2>Avançar status do pedido</h2>}
@@ -82,6 +66,7 @@ export default function OrderTracking() {
                 )}
             />
             <Legends />
-        </div>
+            <ModalOrder order={itemVisible} visible={visible} setItemVisible={setItemVisible} setVisible={setVisible} />
+        </>
     );
 }

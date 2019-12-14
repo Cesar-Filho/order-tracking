@@ -16,25 +16,29 @@ export default function OrderTracking() {
     const columns = [
         { title: 'Cliente', dataIndex: 'clientName', key: 'client' },
         { title: 'Tempo de espera', dataIndex: 'waitingTime', key: 'waitingTime' },
-        { title: 'Status', dataIndex: 'status', key: 'status', render: type => <Badge type={type} /> }
+        { title: 'Status', dataIndex: 'status', key: 'status', render: type => <Badge type={type} /> },
     ];
 
     const state = useMemo(() => {
         const data = list.filter(l => !(l.status === 'PAGO' || l.status === 'EXCLUIDO'));
 
-        return data.map(l => ({
-            ...l,
-            key: l.id,
-            clientName: l.clientName,
-            waitingTime: formatDistance(parseISO(l.createdAt), l.readedAt ? parseISO(l.readedAt) : new Date(), { locale: pt }),
-            status: l.status
-        }));
+        return data
+            .map(l => ({
+                ...l,
+                key: l.id,
+                clientName: l.clientName,
+                waitingTime: formatDistance(parseISO(l.createdAt), l.readedAt ? parseISO(l.readedAt) : new Date(), {
+                    locale: pt,
+                }),
+                status: l.status,
+            }))
+            .sort((a, b) => a.id - b.id);
     }, [list]);
 
     useEffect(() => dispatch(getAll()), [dispatch]);
 
     return (
-        <div style={{ margin: 40 }}>
+        <>
             <Table
                 bordered
                 title={() => <h2>Acompanhamento de pedidos</h2>}
@@ -47,6 +51,6 @@ export default function OrderTracking() {
                 )}
             />
             <Legends />
-        </div>
+        </>
     );
 }
