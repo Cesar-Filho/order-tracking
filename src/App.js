@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
 
 import routes from './routes';
 import Layout from './components/Layout';
@@ -12,7 +12,7 @@ function App() {
 
     return (
         <Layout>
-            <BrowserRouter>
+            <HashRouter>
                 <Spin tip="Loading..." spinning={loading} delay={500}>
                     <React.Suspense fallback={<Spin tip="Loading..." />}>
                         <Switch>
@@ -31,7 +31,7 @@ function App() {
                         </Switch>
                     </React.Suspense>
                 </Spin>
-            </BrowserRouter>
+            </HashRouter>
         </Layout>
     );
 }

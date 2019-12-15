@@ -1,6 +1,7 @@
 import api from '../config/api';
 import { loadingStart, loadingStop } from './loading';
 import { message } from 'antd';
+import history from '../config/history';
 
 const INITIAL_STATE = {
     list: [],
@@ -24,6 +25,7 @@ export function save(obj) {
                 dispatch({ type, payload: resp.data });
                 dispatch(loadingStop());
                 message.success('Registro salvo com sucesso!');
+                history.push('order-tracking');
             })
             .catch(e => {
                 dispatch(loadingStop());

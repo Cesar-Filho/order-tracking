@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layout as LayoutAntd, Menu, Icon } from 'antd';
 
 import styles from './Layout.module.css';
+import history from '../../config/history';
 
 const { Header, Sider, Content } = LayoutAntd;
 
@@ -24,17 +25,21 @@ export default function Layout({ children }) {
             >
                 <div className={styles.logo} />
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1">
-                        <Icon type="user" />
-                        <span>nav 1</span>
+                    <Menu.Item key="1" onClick={() => history.push('order-tracking')}>
+                        <Icon type="pie-chart" />
+                        <span>Acompanhamento</span>
                     </Menu.Item>
-                    <Menu.Item key="2">
-                        <Icon type="video-camera" />
-                        <span>nav 2</span>
+                    <Menu.Item key="2" onClick={() => history.push('advancing-order')}>
+                        <Icon type="fast-forward" />
+                        <span>Avançar pedidos</span>
                     </Menu.Item>
-                    <Menu.Item key="3">
-                        <Icon type="upload" />
-                        <span>nav 3</span>
+                    <Menu.Item key="3" onClick={() => history.push('cashier')}>
+                        <Icon type="calculator" />
+                        <span>Caixa</span>
+                    </Menu.Item>
+                    <Menu.Item key="4" onClick={() => history.push('order-form')}>
+                        <Icon type="form" />
+                        <span>Criar novo pedido</span>
                     </Menu.Item>
                 </Menu>
             </Sider>
