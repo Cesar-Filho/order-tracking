@@ -16,7 +16,14 @@ export default function OrderTracking() {
     const columns = [
         { title: 'Cliente', dataIndex: 'clientName', key: 'client' },
         { title: 'Tempo de espera', dataIndex: 'waitingTime', key: 'waitingTime' },
-        { title: 'Status', dataIndex: 'status', key: 'status', render: type => <Badge type={type} /> },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            align: 'center',
+            width: '200px',
+            render: type => <Badge type={type} />,
+        },
     ];
 
     const state = useMemo(() => {
