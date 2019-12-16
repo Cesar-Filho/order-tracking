@@ -116,7 +116,7 @@
       "clientName": "teste message",
       "cpf": "00606626",
       "description": "testing message success",
-      "status": "PRONTO",
+      "status": "PAGO",
       "createdAt": "2019-12-14T19:30:33.356Z",
       "id": 14,
       "readedAt": "2019-12-15T06:39:27.188Z"
@@ -125,9 +125,10 @@
       "clientName": "teste",
       "cpf": "03030",
       "description": "teste",
-      "status": "PREPARANDO",
+      "status": "PRONTO",
       "createdAt": "2019-12-15T06:36:42.246Z",
-      "id": 15
+      "id": 15,
+      "readedAt": "2019-12-16T01:21:44.072Z"
     },
     {
       "clientName": "teste",
@@ -165,6 +166,14 @@
       "status": "EXCLUIDO",
       "createdAt": "2019-12-16T00:59:12.699Z",
       "id": 20
+    },
+    {
+      "clientName": "customer",
+      "cpf": "000.000.000-00",
+      "description": "description customer",
+      "status": "PREPARANDO",
+      "createdAt": "2019-12-16T01:21:30.613Z",
+      "id": 21
     }
   ]
 }

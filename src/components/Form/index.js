@@ -44,19 +44,18 @@ function FormComponent({ fields, form, title, onSubmit }) {
                     className={styles.btn}
                     type="primary"
                     onClick={() => {
-                        console.log(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(state.cpf));
-                        if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(state.cpf)) {
-                            return message.error(
-                                'CPF Inválido, por favor informe um seguido o exemplo. ex: 000.000.000-00'
-                            );
-                        }
-
                         if (!state.clientName || state.clientName.trim() === '') {
                             return message.error('Informe o nome do cliente.');
                         }
 
                         if (!state.description || state.description.trim() === '') {
                             return message.error('Informe a descrição do pedido.');
+                        }
+
+                        if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(state.cpf)) {
+                            return message.error(
+                                'CPF Inválido, por favor informe um CPF seguindo o exemplo. ex: 000.000.000-00'
+                            );
                         }
 
                         onSubmit(state);
