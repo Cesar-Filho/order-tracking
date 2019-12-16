@@ -14,7 +14,7 @@ export default function OrderForm() {
                 title="Cadastro de pedidos"
                 fields={[
                     { placeholder: 'Nome do Cliente', name: 'clientName' },
-                    { placeholder: 'CPF', name: 'cpf' },
+                    { placeholder: 'CPF', name: 'cpf', type: 'cpf' },
                     { placeholder: 'Descrição', name: 'description', type: 'area' },
                 ]}
                 onSubmit={data => dispatch(save({ ...data, status: 'NOVO' }))}

@@ -11,7 +11,7 @@ export default function Layout({ children }) {
     const toggle = () => setCollapsed(!collapsed);
 
     return (
-        <LayoutAntd>
+        <LayoutAntd style={{ height: '100%' }}>
             <Sider
                 trigger={null}
                 collapsible
@@ -54,6 +54,7 @@ export default function Layout({ children }) {
                         padding: 20,
                         background: '#fff',
                         minHeight: 280,
+                        display: 'inline-table',
                     }}
                 >
                     {children}

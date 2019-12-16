@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
-import { Form, Input, Button, Row, InputNumber } from 'antd';
+import { Form, Input, Button, Row, InputNumber, message } from 'antd';
 import history from '../../config/history';
 
 function FormComponent({ fields, form, title, onSubmit }) {
@@ -40,7 +40,28 @@ function FormComponent({ fields, form, title, onSubmit }) {
                 >
                     Limpar
                 </Button>
-                <Button className={styles.btn} type="primary" onClick={() => onSubmit(state)}>
+                <Button
+                    className={styles.btn}
+                    type="primary"
+                    onClick={() => {
+                        console.log(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(state.cpf));
+                        if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(state.cpf)) {
+                            return message.error(
+                                'CPF Inválido, por favor informe um seguido o exemplo. ex: 000.000.000-00'
+                            );
+                        }
+
+                        if (!state.clientName || state.clientName.trim() === '') {
+                            return message.error('Informe o nome do cliente.');
+                        }
+
+                        if (!state.description || state.description.trim() === '') {
+                            return message.error('Informe a descrição do pedido.');
+                        }
+
+                        onSubmit(state);
+                    }}
+                >
                     Gravar
                 </Button>
             </Row>

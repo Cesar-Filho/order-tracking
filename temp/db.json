@@ -133,9 +133,38 @@
       "clientName": "teste",
       "cpf": "t26",
       "description": "teste",
-      "status": "NOVO",
+      "status": "EXCLUIDO",
       "createdAt": "2019-12-15T06:38:42.100Z",
       "id": 16
+    },
+    {
+      "cpf": 155.956,
+      "clientName": "teste",
+      "description": "teste",
+      "status": "EXCLUIDO",
+      "createdAt": "2019-12-16T00:21:30.015Z",
+      "id": 17
+    },
+    {
+      "cpf": 151.515,
+      "description": "teste",
+      "clientName": "teste",
+      "status": "EXCLUIDO",
+      "createdAt": "2019-12-16T00:22:04.229Z",
+      "id": 18
+    },
+    {
+      "status": "EXCLUIDO",
+      "createdAt": "2019-12-16T00:29:22.562Z",
+      "id": 19
+    },
+    {
+      "cpf": "f",
+      "clientName": "teste",
+      "description": "teste",
+      "status": "EXCLUIDO",
+      "createdAt": "2019-12-16T00:59:12.699Z",
+      "id": 20
     }
   ]
 }
